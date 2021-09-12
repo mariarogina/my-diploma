@@ -14,7 +14,7 @@ import Search from "./Search";
 
 function Catalog({ location, history }) {
   const { items, categories, more } = useSelector((state) => state.catalog);
-  console.log(categories)
+  
   const { searchString } = useSelector((state) => state.search);
 
   const dispatch = useDispatch();
