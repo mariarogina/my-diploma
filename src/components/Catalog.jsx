@@ -26,7 +26,7 @@ function Catalog({ location, history }) {
 
   useEffect(() => {
     if (params.has("offset")) params.delete("offset");
-    dispatch(fetchCategories());
+    dispatch(fetchCategoriesRequest());
     dispatch(fetchItems(params));
   }, []);
 
@@ -99,7 +99,6 @@ function Catalog({ location, history }) {
         ))}
       </ul>
       {items.error ? (
-        // <Error callback={dispatch(fetchItems(params))} />
         <div/>
       ) : (
         items.data.length > 0 && (

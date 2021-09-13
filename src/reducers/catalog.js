@@ -86,7 +86,7 @@ export default function catalogReducer(state = initialState, action) {
         },
       };
     case FETCH_CATEGORIES_SUCCESS:
-      const { categories } = action.payload;
+      const  categories  = action.payload;
       return {
         ...state,
         categories: {

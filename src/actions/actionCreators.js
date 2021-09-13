@@ -16,7 +16,7 @@ import {
   FETCH_MORE_SUCCESS,
   CHANGE_SEARCH_FIELD,
   IS_SEARCHING,
-  SET_AVALIBLE_SIZES,
+  SET_AVAILABLE_SIZES,
   SET_QUANTITY,
   SET_SIZE,
   GET_CART_ITEMS_SUCCESS,
@@ -177,8 +177,9 @@ export const setSearching = () => ({
 });
 
 //catalogue item
-export const fetchItemRequest = () => ({
+export const fetchItemRequest = (id) => ({
   type: FETCH_ITEM_REQUEST,
+  payload: id
 });
 
 export const fetchItemFailure = error => ({
@@ -195,8 +196,8 @@ export const fetchItemSuccess = item => ({
   },
 });
 
-export const setAvalibleSizes = sizes => ({
-  type: SET_AVALIBLE_SIZES,
+export const setAvailableSizes = sizes => ({
+  type: SET_AVAILABLE_SIZES,
   payload: {
     sizes,
   },
@@ -230,7 +231,7 @@ export const fetchItem = (id) => async (dispatch) => {
 
     const data = await response.json();
     const filteredSizes = data.sizes.filter(item => item.avalible);
-    dispatch(setAvalibleSizes(filteredSizes));
+    dispatch(setAvailableSizes(filteredSizes));
     dispatch(fetchItemSuccess(data));
   } catch (error) {
     dispatch(fetchItemFailure(error.message));

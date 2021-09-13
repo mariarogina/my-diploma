@@ -4,14 +4,14 @@ import { fetchItem, fetchItemRequest, setQuantity, setSize } from "../actions/ac
 import Preloader from "./Preloader";
 
 export default function CatalogItem({ match, history }) {
-  const { item, avalibleSizes, loading, quantity, size } = useSelector(
+  const { item, availableSizes, loading, quantity, size } = useSelector(
     (state) => state.catalogItem
   );
   const dispatch = useDispatch();
   const id = match.params.id.replace(".html", "");
 
   useEffect(() => {
-    dispatch(fetchItem(id));
+    dispatch(fetchItemRequest(id));
   }, [id]);
 
   const handleDecrease = () => {
@@ -91,12 +91,12 @@ export default function CatalogItem({ match, history }) {
                   </tr>
                 </tbody>
               </table>
-              {avalibleSizes && (
+              {availableSizes && (
                 <Fragment>
                   <div className="text-center">
                     <p>
                       Размеры в наличии:
-                      {avalibleSizes.map((item) => (
+                      {availableSizes.map((item) => (
                         <span
                           key={item.size}
                           className={`catalog-item-size ${
