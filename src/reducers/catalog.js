@@ -55,7 +55,7 @@ export default function catalogReducer(state = initialState, action) {
         },
       };
     case FETCH_ITEMS_SUCCESS:
-      const { newItems } = action.payload;
+      const  newItems  = action.payload;
       return {
         ...state,
         items: {
@@ -139,19 +139,20 @@ export default function catalogReducer(state = initialState, action) {
 }
 
 export const fetchCategoriesSaga = function* () {
+  
   while(true) {
     yield take(FETCH_CATEGORIES_REQUEST)
     try {
       const response = yield fetch(urls.categories, {
         mode: 'cors',
       });
-      console.log(urls.categories)
+
       if (!response.ok) {
         throw new Error(response.statusText);
       }
 
       const data = yield response.json();
-      
+      console.log(data)
 
       yield put({
         type: FETCH_CATEGORIES_SUCCESS,
@@ -161,6 +162,36 @@ export const fetchCategoriesSaga = function* () {
     } catch (error) {
       yield put({
         type: FETCH_CATEGORIES_FAILURE,
+        payload: error.message
+      })
+    }
+  }
+}
+
+export const fetchItemsSaga = function* () {
+  debugger;
+  while(true) {
+    const {payload} = yield take(FETCH_ITEMS_REQUEST)
+    try {
+      const response = yield fetch(`${urls.items}?${payload}`, {
+        mode: 'cors',
+      });
+
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
+      const data = yield response.json();
+      console.log(data)
+
+      yield put({
+        type: FETCH_ITEMS_SUCCESS,
+        payload: data
+      })
+
+    } catch (error) {
+      yield put({
+        type: FETCH_ITEMS_FAILURE,
         payload: error.message
       })
     }
