@@ -7,7 +7,6 @@ import {
   fetchItemsRequest,
   fetchCategories,
   fetchMore,
-  changeSearchField,
 } from "../actions/actionCreators";
 import Preloader from "./Preloader";
 import Error from "./Error";
@@ -52,7 +51,7 @@ function Catalog({ location, history }) {
   const handleMore = () => {
     params.set("offset", offset);
     setUrl();
-    dispatch(fetchItemsRequest(params));
+    dispatch(fetchMore(params));
   };
 
   const handleSubmit = (evt) => {
@@ -65,10 +64,6 @@ function Catalog({ location, history }) {
   const handleChange = (evt) => {
     dispatch(fetchItemsRequest(evt.target.value));
   };
-
-  // if (categories.loading) return <Preloader />;
-
-  // if (categories.error) return <Error callback={dispatch(fetchCategoriesRequest())} />;
 
   return (
     <Fragment>
@@ -107,8 +102,7 @@ function Catalog({ location, history }) {
         ))}
       </ul>
       {items.error ? (
-        // <Error callback={dispatch(fetchItems(params))} />
-        <div/>
+        <div></div>
       ) : (
         items.data && items.data.length > 0 && (
           <div className="row">
