@@ -118,6 +118,7 @@ export default function Cart() {
                   id="phone"
                   placeholder="Ваш телефон"
                   onChange={handleChange}
+                  required
                 />
               </div>
               <div className="form-group">
@@ -127,6 +128,7 @@ export default function Cart() {
                   id="address"
                   placeholder="Адрес доставки"
                   onChange={handleChange}
+                  required
                 />
               </div>
               <div className="form-group form-check">
@@ -134,6 +136,7 @@ export default function Cart() {
                   type="checkbox"
                   className="form-check-input"
                   id="agreement"
+                  required
                 />
                 <label
                   className="form-check-label"
